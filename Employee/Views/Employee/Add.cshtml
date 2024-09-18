@@ -1,0 +1,42 @@
+﻿@model EmployeeModel
+
+<div class="bg-image">
+    <div class="d-flex justify-content-center align-items-center vh-100 rounded-3">
+        <div class="shadow-lg bg-white rounded-3 w-25 p-3">
+            <div class="text-center">
+                <img src="/Images/Asset/ConcertIDC_Logo_Stack.ico" alt="companylogo" width="100" />
+            </div>
+            <form method="post">
+                <div class="my-3">
+                    <label asp-for="@Model.EmployeeName" class="form-label"></label>
+                    <input type="text" asp-for="@Model.EmployeeName" class="form-control" />
+                    <span asp-validation-for="@Model.EmployeeName" class="text-danger"></span>
+                </div>
+                <div class="my-3">
+                    <label asp-for="@Model.EmployeeEmail" class="form-label"></label>
+                    <input type="email" asp-for="@Model.EmployeeEmail" class="form-control" />
+                    <span asp-validation-for="@Model.EmployeeEmail" class="text-danger"></span>
+                </div>
+                <div class="my-3">
+                    <label asp-for="@Model.EmployeePosition" class="form-label"></label>
+                    <input type="text" asp-for="@Model.EmployeePosition" class="form-control" />
+                    <span asp-validation-for="@Model.EmployeePosition" class="text-danger"></span>
+                </div>
+                <div class="my-3">
+                    <label asp-for="@Model.EmployeePhone" class="form-label"></label>
+                    <input type="text" asp-for="@Model.EmployeePhone" class="form-control" />
+                    <span asp-validation-for="@Model.EmployeePhone" class="text-danger"></span>
+                </div>
+
+                <div>
+                    <button type="submit" class="btn text-white" style="background-color:#a24150">Create</button>
+                    <a class="btn btn-warning" asp-controller="Employee" asp-action="List">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

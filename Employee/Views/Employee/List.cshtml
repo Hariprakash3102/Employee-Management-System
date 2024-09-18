@@ -1,0 +1,73 @@
+﻿@model List<EmployeeModel>
+
+@{
+    ViewData["Title"] = "List of Employee";
+}
+
+<header>
+    <img src="/Images/Asset/ConcertIDC_Logo_Stack.ico" alt="logo" width="100" />
+    <span class="header-text">Welcome to CIDC Employee Details</span>
+    <span class="float-end mt-3 me-5 quote"> "You <strong><span style=" color: #a24150;">make a difference</span></strong>  every day." </span>
+</header>
+<div class="container">
+
+    <div class="p-3 shadow rounded-3">
+        <div>
+            <div class="h4  my-3 me-4">Employee Details</div>
+            <a class="btn btn-primary float-end mb-3 me-4" asp-controller="Employee" asp-action="Add"><i class="bi bi-plus-circle"></i> Create</a>
+        </div>
+        <table id="table" class="table bg-white table-striped table-hover ">
+            <thead>
+                <tr>
+                    <th>Employee Id</th>
+                    <th>Employee Name</th>
+                    <th>Employee Email</th>
+                    <th>Employee Position</th>
+                    <th>Employee Contact</th>
+                    <th class="text-center">Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var employee in Model)
+                {
+                    <tr>
+                        <td>@employee.EmployeeId</td>
+                        <td>@employee.EmployeeName</td>
+                        <td>@employee.EmployeeEmail</td>
+                        <td>@employee.EmployeePosition</td>
+                        <td class="text-center">@employee.EmployeePhone</td>
+                        <td>
+                            <div>
+                                <a class="btn btn-info me-2 rounded-3 text-white" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.EmployeeId"><i class="bi bi-pencil-square"></i> Edit</a>
+
+                                <!--Delete Modal -->
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal-@employee.EmployeeId"><i class="bi bi-trash-fill"></i> Delete</button>
+
+                                <div class="modal fade" id="DeleteModal-@employee.EmployeeId" tabindex="-1" aria-labelledby="DeleteModalLabel-@employee.EmployeeId" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-body">
+                                                <p>Are you sure you want to delete the employee <strong>@employee.EmployeeName</strong>?</p>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                                                <a class="btn btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.EmployeeId"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
+@section Scripts {
+    <script>
+        $('.table').DataTable();
+    </script>
+}
