@@ -30,9 +30,7 @@ namespace Employee.Infrastructure.Repositories
             {
                 dbcontext.Remove(employee);
                 await dbcontext.SaveChangesAsync();
-            }
-
-
+            } 
         }
 
         public async Task<IEnumerable<EmployeeModel>> Get()
@@ -51,6 +49,6 @@ namespace Employee.Infrastructure.Repositories
             dbcontext.Entry(employee).State = EntityState.Modified;
 
             await dbcontext.SaveChangesAsync();
-        }
+        }     
     }
 }

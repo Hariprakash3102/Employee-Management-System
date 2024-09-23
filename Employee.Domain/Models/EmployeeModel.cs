@@ -1,8 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.Diagnostics.CodeAnalysis; 
 
-namespace Employee.Domain.Models
-{
+namespace Employee.Domain.Models;
+
     public class EmployeeModel
     {
         [Key, Display(Name = "Employee Id")]
@@ -20,4 +20,4 @@ namespace Employee.Domain.Models
         [NotNull, Display(Name = "Position"), Required]
         public string? EmployeePosition { get; set; }
     }
-}
+

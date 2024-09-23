@@ -15,9 +15,7 @@ namespace Employee.Infrastructure.Repositories
             this.dbcontext = dbcontext;
             EmployeeRepository = new EmployeeRepository(dbcontext);
         }
-
-        
-
+         
         public async Task<int> SaveAsync()
         {
             return await dbcontext.SaveChangesAsync(); 
