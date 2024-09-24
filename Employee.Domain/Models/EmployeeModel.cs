@@ -5,19 +5,19 @@ namespace Employee.Domain.Models;
 
     public class EmployeeModel
     {
-        [Key, Display(Name = "Employee Id")]
+        [Display(Name = "Employee Id"),Key]
         public Guid EmployeeId { get; set; }
 
-        [NotNull, Display(Name = "Full Name"), Required]
+        [Display(Name = "Full Name")]
         public string? EmployeeName { get; set; }
 
-        [Display(Name = "Email Address"), EmailAddress, Required]
+        [Display(Name = "Email Address")]
         public string? EmployeeEmail { get; set; }
 
-        [NotNull, Display(Name = "Phone Number"), Required]
+        [Display(Name = "Phone Number")]
         public string? EmployeePhone { get; set; }
 
-        [NotNull, Display(Name = "Position"), Required]
+        [Display(Name = "Position")]
         public string? EmployeePosition { get; set; }
     }
 

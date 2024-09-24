@@ -5,6 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using Empolyee.Application.Services;
 using Microsoft.AspNetCore.Identity.UI.Services;
+using Employee.Domain.Validation;
+using FluentValidation.AspNetCore;
+using FluentValidation;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +16,6 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("EmployeeData")));
 
 builder.Services.AddIdentity<IdentityUser,IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true).AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
-
 
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 
@@ -26,7 +28,9 @@ builder.Services.ConfigureApplicationCookie(options =>
     options.AccessDeniedPath = "/identity/Account/AccessDenied0";
 });
 
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews(); 
+
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters().AddValidatorsFromAssemblyContaining<EmployeeModelValidator>();
 
 builder.Services.AddRazorPages();
 
@@ -41,6 +45,7 @@ if (!app.Environment.IsDevelopment())
 }
 
 app.UseHttpsRedirection();
+
 app.UseStaticFiles();
 
 app.UseRouting();
@@ -54,3 +59,4 @@ app.MapControllerRoute(
     pattern: "{controller=Employee}/{action=List}/{id?}");
 
 app.Run();
+
