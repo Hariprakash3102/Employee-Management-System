@@ -24,8 +24,8 @@ builder.Services.AddScoped<IEmailSender, EmailSender>();
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/identity/Account/Login";
-    options.LogoutPath = "/identity/Acco     unt/Logout";
-    options.AccessDeniedPath = "/identity/Account/AccessDenied0";
+    options.LogoutPath = $"/identity/Account/Logout";
+    options.AccessDeniedPath = $"/identity/Account/AccessDenied0";
 });
 
 builder.Services.AddControllersWithViews(); 

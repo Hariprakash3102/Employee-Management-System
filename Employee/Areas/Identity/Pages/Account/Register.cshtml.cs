@@ -124,7 +124,7 @@ namespace Employee.Web.Areas.Identity.Pages.Account
                     _logger.LogInformation("User created a new account with password.");
 
                  
-                    await _userManager.AddToRoleAsync(user,Roles.admin);
+                    await _userManager.AddToRoleAsync(user,Roles.customer);
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

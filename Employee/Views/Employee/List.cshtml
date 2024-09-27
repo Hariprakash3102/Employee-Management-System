@@ -1,4 +1,10 @@
 ﻿@model List<EmployeeModel>
+@using Empolyee.Application.ApplicationConstant
+@{
+    string[] roles = { Roles.admin };
+    bool IsInRoles = roles.Any(role => User.IsInRole(role));
+}
+
 
 @{
     ViewData["Title"] = "List of Employee";
@@ -8,9 +14,17 @@
 <div class="container">
 
     <div class="p-3 shadow rounded-3">
-        <div>
-            <div class="h4  my-3 me-4">Employee Details</div>
-            <a class="btn btn-primary float-end mb-3 me-4" asp-controller="Employee" asp-action="Add"><i class="bi bi-plus-circle"></i> Create</a>
+        <div class="row m-0 p-0">
+           
+                <div class="col-6 h4 py-3 pe-4">Employee Details</div>
+                <div class="col-6">
+                    @if (IsInRoles)
+                    {
+                        <a class="btn btn-primary float-end pb-3 pe-4" asp-controller="Employee" asp-action="Add"><i class="bi bi-plus-circle"></i> Create</a>
+                    }
+                </div>
+         
+
         </div>
         <table id="table" class="table bg-white table-striped table-hover ">
             <thead>
@@ -19,8 +33,12 @@
                     <th>Employee Name</th>
                     <th>Employee Email</th>
                     <th>Employee Position</th>
-                    <th>Employee Contact</th>
-                    <th class="text-center">Action</th>
+                    <th>Employee Contact</th>w2
+                    @if (IsInRoles)
+                    {
+                        <th class="text-center">Action</th>
+                    }
+
                 </tr>
             </thead>
             <tbody>
@@ -33,26 +51,32 @@
                         <td>@employee.EmployeePosition</td>
                         <td class="text-center">@employee.EmployeePhone</td>
                         <td>
-                            <div>
-                                <a class="btn btn-info me-2 rounded-3 text-white" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.EmployeeId"><i class="bi bi-pencil-square"></i> Edit</a>
 
-                                <!--Delete Modal -->
-                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal-@employee.EmployeeId"><i class="bi bi-trash-fill"></i> Delete</button>
+                            @if (IsInRoles)
+                            {
+                                <div>
+                                    <a class="btn btn-info me-2 rounded-3 text-white" asp-controller="Employee" asp-action="Edit" asp-route-id="@employee.EmployeeId"><i class="bi bi-pencil-square"></i> Edit</a>
 
-                                <div class="modal fade" id="DeleteModal-@employee.EmployeeId" tabindex="-1" aria-labelledby="DeleteModalLabel-@employee.EmployeeId" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-body">
-                                                <p>Are you sure you want to delete the employee <strong>@employee.EmployeeName</strong>?</p>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
-                                                <a class="btn btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.EmployeeId"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                    <!--Delete Modal -->
+                                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#DeleteModal-@employee.EmployeeId"><i class="bi bi-trash-fill"></i> Delete</button>
+
+                                    <div class="modal fade" id="DeleteModal-@employee.EmployeeId" tabindex="-1" aria-labelledby="DeleteModalLabel-@employee.EmployeeId" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <p>Are you sure you want to delete the employee <strong>@employee.EmployeeName</strong>?</p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Close</button>
+                                                    <a class="btn btn-danger" asp-controller="Employee" asp-action="Delete" asp-route-id="@employee.EmployeeId"> <i class="bi bi-trash-fill"></i> Delete</a>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            }
+
+
                         </td>
                     </tr>
                 }

@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using Empolyee.Application.ApplicationConstant
+@{
+    string[] roles ={ Roles.admin};
+    bool IsInRoles = roles.Any(role => User.IsInRole(role));
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />

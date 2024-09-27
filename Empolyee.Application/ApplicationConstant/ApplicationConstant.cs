@@ -16,9 +16,9 @@ namespace Empolyee.Application.ApplicationConstant
 
     public static class Roles
     {
-        public static string customer = "Customer";
+        public const string customer = "Customer";
 
-        public static string admin = "Admin";
+        public const string admin = "Admin";
 
         //public static string customer = "Customer";
     }
